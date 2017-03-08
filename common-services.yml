@@ -1,0 +1,27 @@
+version: "2"
+
+services:
+
+  logspout:
+    image: gliderlabs/logspout
+    environment:
+      - DEBUG=true
+      - LOGSPOUT=ignore
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  filebeat:
+    volumes:
+      - ${LOG_PATH}:/usr/local/log
+    environment: 
+      - LOGSPOUT=ignore
+
+  cadvisor:
+    image: google/cadvisor:latest
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    environment: 
+      - LOGSPOUT=ignore
