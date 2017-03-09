@@ -1,9 +1,9 @@
 #!/usr/bin/env sh
 
-REGISTRY_URL="$(cat .env | awk 'BEGIN { FS="="; } /^REGISTRY_URL/ {sub(/\r/,"",$2); print $2;}')"
-LOGSTASH_HOST="$(cat .env | awk 'BEGIN { FS="="; } /^LOGSTASH_HOST/ {sub(/\r/,"",$2); print $2;}')"
-LOG_PATH="$(cat .env | awk 'BEGIN { FS="="; } /^LOG_PATH/ {sub(/\r/,"",$2); print $2;}')"
-FB_DATA_HOME="$(cat .env | awk 'BEGIN { FS="="; } /^FB_DATA_HOME/ {sub(/\r/,"",$2); print $2;}')"
+REGISTRY_URL="${REGISTRY_URL:-$(cat .env | awk 'BEGIN { FS="="; } /^REGISTRY_URL/ {sub(/\r/,"",$2); print $2;}')}"
+LOGSTASH_HOST="${LOGSTASH_HOST:-$(cat .env | awk 'BEGIN { FS="="; } /^LOGSTASH_HOST/ {sub(/\r/,"",$2); print $2;}')}"
+LOG_PATH="${LOG_PATH:-$(cat .env | awk 'BEGIN { FS="="; } /^LOG_PATH/ {sub(/\r/,"",$2); print $2;}')}"
+FB_DATA_HOME="${FB_DATA_HOME:-$(cat .env | awk 'BEGIN { FS="="; } /^FB_DATA_HOME/ {sub(/\r/,"",$2); print $2;}')}"
 
 usage() {
 echo "This script is for docker 1.7 to use with Centos/RedHat 6 only!"
