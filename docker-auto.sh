@@ -30,7 +30,7 @@ echo "  stop-all        Stop all containers running"
 echo
 }
 
-CONF_ARG="-f docker-compose-prod-elk.yml"
+CONF_ARG="-f docker-compose-prod.yml"
 
 if [ $# -eq 0 ]; then
     usage
