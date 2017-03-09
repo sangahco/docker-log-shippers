@@ -41,11 +41,11 @@ for i in "$@"
 do
 case $i in
     --log-prod)
-        CONF_ARG="-f docker-compose-prod-log-shippers.yml"
+        CONF_ARG="-f docker-compose-prod.yml"
         shift
         ;;
     --log-dev)
-        CONF_ARG="-f docker-compose-dev-log-shippers.yml"
+        CONF_ARG="-f docker-compose-dev.yml"
         shift
         ;;
     --help|-h)
