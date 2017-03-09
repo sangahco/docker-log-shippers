@@ -59,3 +59,5 @@ The following settings are available:
 | LOG_PATH      | Filebeat will harvest logs inside this folder                                                                            |         |
 | FB_DATA_HOME  | Filebeat data directory, where the log files states are stored,  it should be changed in production to a local directory | fbdata  |
 | LOGSTASH_HOST | Logstash host machine                                                                                                    |         |
+
+(\*) *table generated with [tablesgenerator](http://www.tablesgenerator.com/markdown_tables)*
