@@ -9,6 +9,7 @@ services:
     extra_hosts: 
     - "logstash:${LOGSTASH_HOST}"
     command: syslog://${LOGSTASH_HOST}:5000
+    restart: "unless-stopped"
 
   filebeat:
     image: ${REGISTRY_URL}/filebeat
@@ -19,6 +20,7 @@ services:
     - ${FB_DATA_HOME}:/data
     extra_hosts: 
     - "logstash:${LOGSTASH_HOST}"
+    restart: "unless-stopped"
 
 volumes:
   fbdata:
