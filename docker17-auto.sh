@@ -6,8 +6,11 @@ REGISTRY_URL="${REGISTRY_URL:-$(cat .env | awk 'BEGIN { FS="="; } /^REGISTRY_URL
 LOGSTASH_HOST="${LOGSTASH_HOST:-$(cat .env | awk 'BEGIN { FS="="; } /^LOGSTASH_HOST/ {sub(/\r/,"",$2); print $2;}')}"
 LOG_PATH="${LOG_PATH:-$(cat .env | awk 'BEGIN { FS="="; } /^LOG_PATH/ {sub(/\r/,"",$2); print $2;}')}"
 FB_DATA_HOME="${FB_DATA_HOME:-$(cat .env | awk 'BEGIN { FS="="; } /^FB_DATA_HOME/ {sub(/\r/,"",$2); print $2;}')}"
-FILEBEAT_CONTAINER_ID=/var/run/fb.did
-FB_DID=`cat "$FILEBEAT_CONTAINER_ID"`
+FB_CONTAINER_ID_FILE=/var/run/fb.did
+
+if [ -f "$FB_CONTAINER_ID_FILE" ]; then
+    FB_DID=`cat "$FB_CONTAINER_ID_FILE"`
+fi
 
 SCRIPT_BASE_PATH=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 cd "$SCRIPT_BASE_PATH"
@@ -54,7 +57,7 @@ if [ "$1" == "up" ]; then
     --volume "${LOG_PATH}:/usr/local/log" \
     --detach=true \
     --restart=always \
-    $REGISTRY_URL/filebeat > $FILEBEAT_CONTAINER_ID
+    $REGISTRY_URL/filebeat > $FB_CONTAINER_ID_FILE
     exit 0
 
 elif [ "$1" == "down" ]; then
