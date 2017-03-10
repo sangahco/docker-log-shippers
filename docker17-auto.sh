@@ -62,6 +62,8 @@ if [ "$1" == "up" ]; then
     --volume "${LOG3_PATH}:/usr/local/log/3" \
     --volume "${LOG4_PATH}:/usr/local/log/4" \
     --volume "${LOG5_PATH}:/usr/local/log/5" \
+    --env "FB_TAGS=${FB_TAGS}" \
+    --env "FB_LOG_LEVEL=${FB_LOG_LEVEL}" \
     --detach=true \
     --restart=always \
     $REGISTRY_URL/filebeat > $FB_CONTAINER_ID_FILE
