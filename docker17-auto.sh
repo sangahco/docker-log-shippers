@@ -66,11 +66,11 @@ elif [ "$1" == "down" ]; then
 
 elif [ "$1" == "stop-all" ]; then
     if [ -n "$(docker ps --format {{.ID}})" ]
-    then docker stop $(docker ps --format {{.ID}}); fi
+    then docker stop $(docker ps -q); fi
 
 elif [ "$1" == "remove-all" ]; then
-    if [ -n "$(docker ps -a --format {{.ID}})" ]
-    then docker rm $(docker ps -a --format {{.ID}}); fi
+    if [ -n "$(docker ps -a -q)" ]
+    then docker rm $(docker ps -a -q); fi
 
 elif [ "$1" == "logs" ]; then
     shift

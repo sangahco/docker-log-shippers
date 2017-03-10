@@ -12,7 +12,9 @@ services:
 
   filebeat:
     volumes:
-    - ${LOG_PATH}:/usr/local/log
+    - ${LOG_PATH}:/usr/local/log/1
+    - ${LOG2_PATH}:/usr/local/log/2
+    - ${LOG3_PATH}:/usr/local/log/3
     - ${FB_DATA_HOME}:/data
     environment: 
     - LOGSPOUT=ignore
