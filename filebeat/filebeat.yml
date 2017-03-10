@@ -1,5 +1,7 @@
 filebeat.modules:
 
+tags: ${FB_TAGS:filebeat}
+
 filebeat.prospectors:
 
 - input_type: log
@@ -16,3 +18,7 @@ output.logstash:
   hosts: ["logstash:5043"]
 
 path.data: /data
+
+logging.level: ${FB_LOG_LEVEL:info}
+logging.to_files: false
+logging.to_syslog: true

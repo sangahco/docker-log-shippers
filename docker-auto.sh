@@ -14,8 +14,8 @@ usage() {
 echo "Usage:  $(basename "$0") [MODE] [OPTIONS] [COMMAND]"
 echo 
 echo "Mode:"
-echo "  --log-prod      Log shippers for production"
-echo "  --log-dev       Log shippers for development"
+echo "  --prod      Log shippers for production"
+echo "  --dev       Log shippers for development"
 echo
 echo "Options:"
 echo "  --with-cadv     Add CAdvisor service"
@@ -40,11 +40,11 @@ fi
 for i in "$@"
 do
 case $i in
-    --log-prod)
+    --prod)
         CONF_ARG="-f docker-compose-prod.yml"
         shift
         ;;
-    --log-dev)
+    --dev)
         CONF_ARG="-f docker-compose-dev.yml"
         shift
         ;;
