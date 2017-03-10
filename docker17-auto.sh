@@ -4,7 +4,13 @@ set -e
 
 REGISTRY_URL="${REGISTRY_URL:-$(cat .env | awk 'BEGIN { FS="="; } /^REGISTRY_URL/ {sub(/\r/,"",$2); print $2;}')}"
 LOGSTASH_HOST="${LOGSTASH_HOST:-$(cat .env | awk 'BEGIN { FS="="; } /^LOGSTASH_HOST/ {sub(/\r/,"",$2); print $2;}')}"
+
 LOG_PATH="${LOG_PATH:-$(cat .env | awk 'BEGIN { FS="="; } /^LOG_PATH/ {sub(/\r/,"",$2); print $2;}')}"
+LOG2_PATH="${LOG2_PATH:-$(cat .env | awk 'BEGIN { FS="="; } /^LOG2_PATH/ {sub(/\r/,"",$2); print $2;}')}"
+LOG3_PATH="${LOG3_PATH:-$(cat .env | awk 'BEGIN { FS="="; } /^LOG3_PATH/ {sub(/\r/,"",$2); print $2;}')}"
+LOG4_PATH="${LOG4_PATH:-$(cat .env | awk 'BEGIN { FS="="; } /^LOG4_PATH/ {sub(/\r/,"",$2); print $2;}')}"
+LOG5_PATH="${LOG5_PATH:-$(cat .env | awk 'BEGIN { FS="="; } /^LOG5_PATH/ {sub(/\r/,"",$2); print $2;}')}"
+
 FB_DATA_HOME="${FB_DATA_HOME:-$(cat .env | awk 'BEGIN { FS="="; } /^FB_DATA_HOME/ {sub(/\r/,"",$2); print $2;}')}"
 FB_CONTAINER_ID_FILE=/var/run/fb.did
 
@@ -54,7 +60,11 @@ if [ "$1" == "up" ]; then
     docker run \
     --add-host=logstash:${LOGSTASH_HOST} \
     --volume "${FB_DATA_HOME}:/data" \
-    --volume "${LOG_PATH}:/usr/local/log" \
+    --volume "${LOG_PATH}:/usr/local/log/1" \
+    --volume "${LOG2_PATH}:/usr/local/log/2" \
+    --volume "${LOG3_PATH}:/usr/local/log/3" \
+    --volume "${LOG4_PATH}:/usr/local/log/4" \
+    --volume "${LOG5_PATH}:/usr/local/log/5" \
     --detach=true \
     --restart=always \
     $REGISTRY_URL/filebeat > $FB_CONTAINER_ID_FILE
