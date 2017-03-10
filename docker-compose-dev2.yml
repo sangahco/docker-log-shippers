@@ -14,8 +14,6 @@ services:
     extends: 
       file: common-services.yml
       service: filebeat
-    volumes: 
-      - fbdata:/data
     network_mode: "container:logstash-srv"
 
 volumes:

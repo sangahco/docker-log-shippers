@@ -16,8 +16,6 @@ services:
     extends: 
       file: common-services.yml
       service: filebeat
-    volumes: 
-    - ${FB_DATA_HOME}:/data
     extra_hosts: 
     - "logstash:${LOGSTASH_HOST}"
     restart: "unless-stopped"

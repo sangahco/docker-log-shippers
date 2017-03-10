@@ -13,6 +13,7 @@ services:
   filebeat:
     volumes:
     - ${LOG_PATH}:/usr/local/log
+    - ${FB_DATA_HOME}:/data
     environment: 
     - LOGSPOUT=ignore
     - FB_TAGS
