@@ -29,10 +29,6 @@ echo "Download docker 1.7.1:"
 echo "$ wget https://s3.ap-northeast-2.amazonaws.com/sangah-b1/docker-engine-1.7.1-1.el6.x86_64.rpm"
 echo "Install with:"
 echo "$ sudo yum localinstall --nogpgcheck docker-engine-1.7.1-1.el6.x86_64.rpm"
-echo 
-echo "Mode:"
-echo "  --log-prod      Log shippers for production"
-echo "  --log-dev       Log shippers for development"
 echo
 echo "Commands:"
 echo "  up              Start the services"
@@ -57,6 +53,7 @@ echo "Arguments: $CONF_ARG"
 echo "Command: $@"
 
 if [ "$1" == "up" ]; then
+    docker pull $REGISTRY_URL/filebeat
     docker run \
     --add-host=logstash:${LOGSTASH_HOST} \
     --volume "${FB_DATA_HOME}:/data" \
