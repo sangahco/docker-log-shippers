@@ -14,8 +14,8 @@ usage() {
 echo "Usage:  $(basename "$0") [MODE] [OPTIONS] [COMMAND]"
 echo 
 echo "Mode:"
-echo "  --log-prod      Log shippers for production"
-echo "  --log-dev       Log shippers for development"
+echo "  --prod      Log shippers for production"
+echo "  --dev       Log shippers for development"
 echo
 echo "Options:"
 echo "  --with-cadv     Add CAdvisor service"
@@ -30,7 +30,7 @@ echo "  stop-all        Stop all containers running"
 echo
 }
 
-CONF_ARG="-f docker-compose-prod-elk.yml"
+CONF_ARG="-f docker-compose-prod.yml"
 
 if [ $# -eq 0 ]; then
     usage
@@ -40,12 +40,12 @@ fi
 for i in "$@"
 do
 case $i in
-    --log-prod)
-        CONF_ARG="-f docker-compose-prod-log-shippers.yml"
+    --prod)
+        CONF_ARG="-f docker-compose-prod.yml"
         shift
         ;;
-    --log-dev)
-        CONF_ARG="-f docker-compose-dev-log-shippers.yml"
+    --dev)
+        CONF_ARG="-f docker-compose-dev.yml"
         shift
         ;;
     --help|-h)

@@ -1,9 +1,22 @@
 filebeat.modules:
 
+tags: ${FB_TAGS:filebeat}
+
 filebeat.prospectors:
 
 - input_type: log
-  paths: ["/usr/local/log/*.log", "/usr/local/log/*/*.log"]
+  paths: 
+  - "/usr/local/log/1/*.log"
+  - "/usr/local/log/1/*/*.log"
+  - "/usr/local/log/2/*.log"
+  - "/usr/local/log/2/*/*.log"
+  - "/usr/local/log/3/*.log"
+  - "/usr/local/log/3/*/*.log"
+  - "/usr/local/log/4/*.log"
+  - "/usr/local/log/4/*/*.log"
+  - "/usr/local/log/5/*.log"
+  - "/usr/local/log/5/*/*.log"
+
   ignore_older: "12h"
   clean_inactive: "72h"
   exclude_lines: ['^DEBUG']
@@ -16,3 +29,7 @@ output.logstash:
   hosts: ["logstash:5043"]
 
 path.data: /data
+
+logging.level: ${FB_LOG_LEVEL:info}
+logging.to_files: false
+logging.to_syslog: true

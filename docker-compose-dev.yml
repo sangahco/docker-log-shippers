@@ -6,17 +6,17 @@ services:
     extends: 
       file: common-services.yml
       service: logspout
-    command: syslog://127.0.0.1:5000
-    network_mode: "container:logstash-srv"
+    extra_hosts: 
+    - "logstash:${LOGSTASH_HOST}"
+    command: syslog://${LOGSTASH_HOST}:5000
 
   filebeat:
     build: filebeat
     extends: 
       file: common-services.yml
       service: filebeat
-    volumes: 
-      - fbdata:/data
-    network_mode: "container:logstash-srv"
+    extra_hosts: 
+    - "logstash:${LOGSTASH_HOST}"
 
 volumes:
   fbdata:

@@ -12,9 +12,16 @@ services:
 
   filebeat:
     volumes:
-      - ${LOG_PATH}:/usr/local/log
+    - ${LOG_PATH}:/usr/local/log/1
+    - ${LOG2_PATH}:/usr/local/log/2
+    - ${LOG3_PATH}:/usr/local/log/3
+    - ${LOG4_PATH}:/usr/local/log/4
+    - ${LOG5_PATH}:/usr/local/log/5
+    - ${FB_DATA_HOME}:/data
     environment: 
-      - LOGSPOUT=ignore
+    - LOGSPOUT=ignore
+    - FB_TAGS
+    - FB_LOG_LEVEL
 
   cadvisor:
     image: google/cadvisor:latest

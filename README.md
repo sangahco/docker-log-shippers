@@ -1,59 +1,63 @@
-# ELK&Friends Stack, Elasticsearch, Logstash, Kibana with Filebeat and Logspout shippers
+# Log Shippers Filebeat and Logspout for Logstash
 
-This is a logging service composed by several microservices (some of them not so *micro*):
+These are a series of log shippers to use for *harvesting* log from the server and bring it to Logstash,
+which in turn it will give it to Elasticsearch.
 
-- **Elasticsearch** - The container for the log data, all the log is saved on this search engine
-- **Logstash** - Is the log aggregator, it takes log from log shippers and saved it into the search engine
-- **Kibana** - Search and visualize the log on a web interface
-- **Logspout** - read the log from Docker containers and send it to Logstash
-- **Filebeat** - read the log from log files and send it to Logstash
-
-### Extra
-
-- **ES Head Plugin** - For managing Elasticsearch engine data
-- **Cadvisor** - Monitoring service for Docker containers
+- **Logspout** - Read the log from Docker containers and send it to Logstash
+- **Filebeat** - Read the log from log files and send it to Logstash
 
 
 ## Configurations available:
 
-- **docker-compose-dev-elk.yml**
-
-  This is for testing the entire *ELK* (Elasticsearch, Logstash and Kibana) stack together with log shippers.
-  Images are built and executed.
-
-- **docker-compose-prod-elk.yml**
-
-  Production configuration for the ELK stack.
-
-- **docker-compose-prod-log-shippers.yml**
+- **docker-compose-prod.yml**
 
   Production configuration for log shippers.
   You should use this on the server where the web application is running, 
   in order to send logs to the ELK stack. `LOGSTASH_HOST` required.
 
-- **docker-compose-dev-log-shippers.yml**
+- **docker-compose-dev.yml**
 
-  Same as above but for development purpose and it should run on the ELK server.
+  The development configuration build the images before running them, 
+  you still need to set `LOGSTASH_HOST` to point to the *Logstash* server.
 
-- **docker-compose-cadvisor.yml**
+- **docker-compose-dev2.yml**
 
-  Container memory manager. It should be available at port `5602`.
+  In case the [ELK stack](https://github.com/sangahco/docker-elk-stack) is running on the same server, 
+  where you want to test these log shippers, is possible to use this configuration,
+  with no need to set the `LOGSTASH_HOST` variable.
 
----
+## Requirements
+
+First make sure *Docker* and *Docker Compose* are installed on the machine with:
+
+    $ docker -v
+    $ docker-compose -v
+
+If they are missing, follow the instructions on the official website (they are not hard really...):
+
+- [Docker CE Install How-to](https://docs.docker.com/engine/installation/)
+- [Docker Compose Install How-to](https://docs.docker.com/compose/install/)
+
 
 ## How to Use
 
+Before starting the services make sure the variable `LOGSTASH_HOST` 
+is set correctly to the right *Logstash* host machine.
 
 **Use the script `docker-auto.sh` to manage these services!**
 
     $ ./docker-auto.sh --help
 
 
-> **ELK stack deployment**
-> 
-> *Elasticsearch* and *Logstash* require a large amount of virtual memory, to resolve this issue,
-> execute the following command as `root` on the Docker host machine, before starting the service:
->
->       $ sudo sysctl -w vm.max_map_count=262144
+## Settings Up the Environment
 
-`Kibana` Web Interface is accessible through the port `5601`.
+The following settings are available:
+
+| Variable      | Description                                                                                                              | Default |
+|---------------|--------------------------------------------------------------------------------------------------------------------------|---------|
+| REGISTRY_URL  | This is the docker registry host where to publish the images                                                             |         |
+| LOG_PATH      | Filebeat will harvest logs inside this folder                                                                            |         |
+| FB_DATA_HOME  | Filebeat data directory, where the log files states are stored,  it should be changed in production to a local directory | fbdata  |
+| LOGSTASH_HOST | Logstash host machine                                                                                                    |         |
+
+(\*) *table generated with [tablesgenerator](http://www.tablesgenerator.com/markdown_tables)*
