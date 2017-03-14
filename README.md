@@ -53,11 +53,16 @@ is set correctly to the right *Logstash* host machine.
 
 The following settings are available:
 
-| Variable      | Description                                                                                                              | Default |
-|---------------|--------------------------------------------------------------------------------------------------------------------------|---------|
-| REGISTRY_URL  | This is the docker registry host where to publish the images                                                             |         |
-| LOG_PATH      | Filebeat will harvest logs inside this folder                                                                            |         |
-| FB_DATA_HOME  | Filebeat data directory, where the log files states are stored,  it should be changed in production to a local directory | fbdata  |
-| LOGSTASH_HOST | Logstash host machine                                                                                                    |         |
+| Variable     | Description                                                                                                                                         | Default  |
+|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|----------|
+| REGISTRY_URL | This is the docker registry host where to publish the images                                                                                        |          |
+| LOG_PATH     | Filebeat will harvest logs inside this folder                                                                                                       |          |
+| LOG2_PATH    | Filebeat will harvest logs inside this folder                                                                                                       |          |
+| LOG3_PATH    | Filebeat will harvest logs inside this folder                                                                                                       |          |
+| LOG4_PATH    | Filebeat will harvest logs inside this folder                                                                                                       |          |
+| LOG5_PATH    | Filebeat will harvest logs inside this folder                                                                                                       |          |
+| FB_DATA_HOME | Filebeat data directory, where the log files states are stored,  it should be changed in production to a local directory                            | fbdata   |
+| FB_TAGS      | Tags to send together with the log to logstash,  wrap the group with single quotation mark and separate them with comma ( ex. 'tag1, tag2, tag3' ). | filebeat |
+| LOGSTASH_URL | Logstash host machine                                                                                                                               |          |
 
 (\*) *table generated with [tablesgenerator](http://www.tablesgenerator.com/markdown_tables)*

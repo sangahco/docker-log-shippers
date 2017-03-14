@@ -7,8 +7,8 @@ services:
       file: common-services.yml
       service: logspout
     extra_hosts: 
-    - "logstash:${LOGSTASH_HOST}"
-    command: syslog://${LOGSTASH_HOST}:5000
+    - "logstash:${LOGSTASH_URL}"
+    command: syslog://${LOGSTASH_URL}:5000
     restart: "unless-stopped"
 
   filebeat:
@@ -17,7 +17,7 @@ services:
       file: common-services.yml
       service: filebeat
     extra_hosts: 
-    - "logstash:${LOGSTASH_HOST}"
+    - "logstash:${LOGSTASH_URL}"
     restart: "unless-stopped"
 
 volumes:
