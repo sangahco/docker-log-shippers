@@ -55,7 +55,7 @@ echo "Command: $@"
 if [ "$1" == "up" ]; then
     docker pull $REGISTRY_URL/filebeat
     docker run \
-    --add-host=logstash:${LOGSTASH_HOST} \
+    --add-host=logstash:${LOGSTASH_URL} \
     --volume "${FB_DATA_HOME}:/data" \
     --volume "${LOG_PATH}:/usr/local/log/1" \
     --volume "${LOG2_PATH}:/usr/local/log/2" \
