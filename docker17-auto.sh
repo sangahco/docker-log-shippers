@@ -86,4 +86,6 @@ elif [ "$1" == "logs" ]; then
     docker logs -f --tail 200 $FB_DID
 fi
 
+docker "$@" $FB_DID
+
 exit $?
