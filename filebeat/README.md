@@ -114,4 +114,4 @@ Stop the service.
 
 ---
 
-Done!
+Done start logging!
