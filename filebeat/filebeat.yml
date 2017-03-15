@@ -21,7 +21,7 @@ filebeat.prospectors:
   clean_inactive: "72h"
   exclude_lines: ['^DEBUG']
 
-  multiline.pattern: '^[[:space:]]+|^Caused by:|^---[[:space:]]'
+  multiline.pattern: '^[[:space:]]+|^Caused by:|^---[[:space:]]|^$'
   multiline.negate: false
   multiline.match: after
 
