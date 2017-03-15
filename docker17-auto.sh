@@ -74,7 +74,7 @@ elif [ "$1" == "down" ]; then
     docker stop $FB_DID >/dev/null && docker rm $FB_DID
 
 elif [ "$1" == "stop-all" ]; then
-    if [ -n "$(docker ps --format {{.ID}})" ]
+    if [ -n "$(docker ps -q)" ]
     then docker stop $(docker ps -q); fi
 
 elif [ "$1" == "remove-all" ]; then
