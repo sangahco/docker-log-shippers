@@ -72,18 +72,23 @@ if [ "$1" == "up" ]; then
 elif [ "$1" == "down" ]; then
     shift
     docker stop $FB_DID >/dev/null && docker rm $FB_DID
+    exit 0
 
 elif [ "$1" == "stop-all" ]; then
     if [ -n "$(docker ps -q)" ]
     then docker stop $(docker ps -q); fi
+    exit 0
 
 elif [ "$1" == "remove-all" ]; then
     if [ -n "$(docker ps -a -q)" ]
     then docker rm $(docker ps -a -q); fi
+    exit 0
 
 elif [ "$1" == "logs" ]; then
     shift
     docker logs -f --tail 200 $FB_DID
+    exit 0
+    
 fi
 
 docker "$@" $FB_DID
