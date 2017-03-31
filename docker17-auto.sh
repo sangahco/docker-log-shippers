@@ -24,10 +24,12 @@ usage() {
 echo "Usage:  $(basename "$0") [MODE] [OPTIONS] [COMMAND]"
 echo
 echo "This script is for docker 1.7 to use with Centos/RedHat 6 only!"
-echo "Download docker 1.7.1:"
-echo "$ wget https://s3.ap-northeast-2.amazonaws.com/sangah-b1/docker-engine-1.7.1-1.el6.x86_64.rpm"
-echo "Install with:"
-echo "$ sudo yum localinstall --nogpgcheck docker-engine-1.7.1-1.el6.x86_64.rpm"
+echo "Download and install docker 1.7.1:"
+echo "$ sudo -i"
+echo "# wget https://s3.ap-northeast-2.amazonaws.com/sangah-b1/docker-engine-1.7.1-1.el6.x86_64.rpm"
+echo "# yum localinstall --nogpgcheck docker-engine-1.7.1-1.el6.x86_64.rpm"
+echo "# service docker start"
+echo "# exit"
 echo
 echo "Commands:"
 echo "  up              Start the services"
