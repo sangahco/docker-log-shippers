@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -ex
+set -e
 
 getenv(){
     local _env="$(printenv $1)"
