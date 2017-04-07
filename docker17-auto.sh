@@ -9,7 +9,7 @@ LOG2_PATH="${LOG2_PATH:-$(cat .env | awk 'BEGIN { FS="="; } /^LOG2_PATH/ {sub(/\
 LOG3_PATH="${LOG3_PATH:-$(cat .env | awk 'BEGIN { FS="="; } /^LOG3_PATH/ {sub(/\r/,"",$2); print $2;}')}"
 LOG4_PATH="${LOG4_PATH:-$(cat .env | awk 'BEGIN { FS="="; } /^LOG4_PATH/ {sub(/\r/,"",$2); print $2;}')}"
 LOG5_PATH="${LOG5_PATH:-$(cat .env | awk 'BEGIN { FS="="; } /^LOG5_PATH/ {sub(/\r/,"",$2); print $2;}')}"
-
+FB_TAGS="${FB_TAGS:-$(cat .env | awk 'BEGIN { FS="="; } /^FB_TAGS/ {sub(/\r/,"",$2); print $2;}')}"
 FB_DATA_HOME="${FB_DATA_HOME:-$(cat .env | awk 'BEGIN { FS="="; } /^FB_DATA_HOME/ {sub(/\r/,"",$2); print $2;}')}"
 FB_CONTAINER_ID_FILE=/var/run/fb.did
 
