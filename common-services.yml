@@ -17,6 +17,11 @@ services:
     - ${LOG3_PATH}:/usr/local/log/3
     - ${LOG4_PATH}:/usr/local/log/4
     - ${LOG5_PATH}:/usr/local/log/5
+    - ${LOG6_PATH}:/usr/local/log/6
+    - ${LOG7_PATH}:/usr/local/log/7
+    - ${LOG8_PATH}:/usr/local/log/8
+    - ${LOG9_PATH}:/usr/local/log/9
+    - ${LOG10_PATH}:/usr/local/log/10
     - ${FB_DATA_HOME}:/data
     environment: 
     - LOGSPOUT=ignore
