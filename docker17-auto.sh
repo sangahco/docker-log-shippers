@@ -9,7 +9,7 @@ LOG2_PATH="${LOG2_PATH:-$(cat .env | awk 'BEGIN { FS="="; } /^LOG2_PATH/ {sub(/\
 LOG3_PATH="${LOG3_PATH:-$(cat .env | awk 'BEGIN { FS="="; } /^LOG3_PATH/ {sub(/\r/,"",$2); print $2;}')}"
 LOG4_PATH="${LOG4_PATH:-$(cat .env | awk 'BEGIN { FS="="; } /^LOG4_PATH/ {sub(/\r/,"",$2); print $2;}')}"
 LOG5_PATH="${LOG5_PATH:-$(cat .env | awk 'BEGIN { FS="="; } /^LOG5_PATH/ {sub(/\r/,"",$2); print $2;}')}"
-
+FB_TAGS="${FB_TAGS:-$(cat .env | awk 'BEGIN { FS="="; } /^FB_TAGS/ {sub(/\r/,"",$2); print $2;}')}"
 FB_DATA_HOME="${FB_DATA_HOME:-$(cat .env | awk 'BEGIN { FS="="; } /^FB_DATA_HOME/ {sub(/\r/,"",$2); print $2;}')}"
 FB_CONTAINER_ID_FILE=/var/run/fb.did
 
@@ -24,10 +24,12 @@ usage() {
 echo "Usage:  $(basename "$0") [MODE] [OPTIONS] [COMMAND]"
 echo
 echo "This script is for docker 1.7 to use with Centos/RedHat 6 only!"
-echo "Download docker 1.7.1:"
-echo "$ wget https://s3.ap-northeast-2.amazonaws.com/sangah-b1/docker-engine-1.7.1-1.el6.x86_64.rpm"
-echo "Install with:"
-echo "$ sudo yum localinstall --nogpgcheck docker-engine-1.7.1-1.el6.x86_64.rpm"
+echo "Download and install docker 1.7.1:"
+echo "$ sudo -i"
+echo "# wget https://s3.ap-northeast-2.amazonaws.com/sangah-b1/docker-engine-1.7.1-1.el6.x86_64.rpm"
+echo "# yum localinstall --nogpgcheck docker-engine-1.7.1-1.el6.x86_64.rpm"
+echo "# service docker start"
+echo "# exit"
 echo
 echo "Commands:"
 echo "  up              Start the services"
