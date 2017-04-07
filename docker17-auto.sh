@@ -32,6 +32,7 @@ echo
 echo "Commands:"
 echo "  up              Start the services"
 echo "  down            Stop the services"
+echo "  restart         Restart the services"
 echo "  logs            Follow the logs on console"
 echo "  remove-all      Remove all containers"
 echo "  stop-all        Stop all containers running"
