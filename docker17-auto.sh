@@ -2,15 +2,25 @@
 
 set -e
 
-REGISTRY_URL="${REGISTRY_URL:-$(cat .env | awk 'BEGIN { FS="="; } /^REGISTRY_URL/ {sub(/\r/,"",$2); print $2;}')}"
-LOGSTASH_URL="${LOGSTASH_URL:-$(cat .env | awk 'BEGIN { FS="="; } /^LOGSTASH_URL/ {sub(/\r/,"",$2); print $2;}')}"
-LOG_PATH="${LOG_PATH:-$(cat .env | awk 'BEGIN { FS="="; } /^LOG_PATH/ {sub(/\r/,"",$2); print $2;}')}"
-LOG2_PATH="${LOG2_PATH:-$(cat .env | awk 'BEGIN { FS="="; } /^LOG2_PATH/ {sub(/\r/,"",$2); print $2;}')}"
-LOG3_PATH="${LOG3_PATH:-$(cat .env | awk 'BEGIN { FS="="; } /^LOG3_PATH/ {sub(/\r/,"",$2); print $2;}')}"
-LOG4_PATH="${LOG4_PATH:-$(cat .env | awk 'BEGIN { FS="="; } /^LOG4_PATH/ {sub(/\r/,"",$2); print $2;}')}"
-LOG5_PATH="${LOG5_PATH:-$(cat .env | awk 'BEGIN { FS="="; } /^LOG5_PATH/ {sub(/\r/,"",$2); print $2;}')}"
-FB_TAGS="${FB_TAGS:-$(cat .env | awk 'BEGIN { FS="="; } /^FB_TAGS/ {sub(/\r/,"",$2); print $2;}')}"
-FB_DATA_HOME="${FB_DATA_HOME:-$(cat .env | awk 'BEGIN { FS="="; } /^FB_DATA_HOME/ {sub(/\r/,"",$2); print $2;}')}"
+getenv(){
+    local _env="$(printenv $1)"
+    echo "${_env:-$(cat .env | awk 'BEGIN { FS="="; } /^'$1'/ {sub(/\r/,"",$2); print $2;}')}"
+}
+
+REGISTRY_URL="$(getenv REGISTRY_URL)"
+LOGSTASH_URL="$(getenv LOGSTASH_URL)"
+LOG_PATH="$(getenv LOG_PATH)"
+LOG2_PATH="$(getenv LOG2_PATH)"
+LOG3_PATH="$(getenv LOG3_PATH)"
+LOG4_PATH="$(getenv LOG4_PATH)"
+LOG5_PATH="$(getenv LOG5_PATH)"
+LOG6_PATH="$(getenv LOG6_PATH)"
+LOG7_PATH="$(getenv LOG7_PATH)"
+LOG8_PATH="$(getenv LOG8_PATH)"
+LOG9_PATH="$(getenv LOG9_PATH)"
+LOG10_PATH="$(getenv LOG10_PATH)"
+FB_TAGS="$(getenv FB_TAGS)"
+FB_DATA_HOME="$(getenv FB_DATA_HOME)"
 FB_CONTAINER_ID_FILE=/var/run/fb.did
 
 if [ -f "$FB_CONTAINER_ID_FILE" ]; then
@@ -64,6 +74,11 @@ if [ "$1" == "up" ]; then
     --volume "${LOG3_PATH}:/usr/local/log/3" \
     --volume "${LOG4_PATH}:/usr/local/log/4" \
     --volume "${LOG5_PATH}:/usr/local/log/5" \
+    --volume "${LOG6_PATH}:/usr/local/log/6" \
+    --volume "${LOG7_PATH}:/usr/local/log/7" \
+    --volume "${LOG8_PATH}:/usr/local/log/8" \
+    --volume "${LOG9_PATH}:/usr/local/log/9" \
+    --volume "${LOG10_PATH}:/usr/local/log/10" \
     --env "FB_TAGS=${FB_TAGS}" \
     --env "FB_LOG_LEVEL=${FB_LOG_LEVEL}" \
     --detach=true \

@@ -12,7 +12,7 @@ services:
     restart: "unless-stopped"
 
   filebeat:
-    image: ${REGISTRY_URL}/filebeat:5.2
+    image: ${REGISTRY_URL}/filebeat:latest
     extends: 
       file: common-services.yml
       service: filebeat
