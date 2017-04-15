@@ -70,6 +70,8 @@ echo "Command: $@"
 
 if [ "$1" == "login" ]; then
     docker login $REGISTRY_URL
+    exit 0
+
 elif [ "$1" == "up" ]; then
     docker-compose $CONF_ARG pull
     docker-compose $CONF_ARG build --pull
