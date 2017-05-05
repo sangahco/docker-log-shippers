@@ -2,13 +2,21 @@
 
 set -e
 
+DOCKER_COMPOSE_VERSION="1.11.2"
+CONF_ARG="-f docker-compose-prod.yml"
+SCRIPT_BASE_PATH=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+cd "$SCRIPT_BASE_PATH"
+
 REGISTRY_URL="$REGISTRY_URL"
 if [ -z "$REGISTRY_URL" ]; then
     REGISTRY_URL="$(cat .env | awk 'BEGIN { FS="="; } /^REGISTRY_URL/ {sub(/\r/,"",$2); print $2;}')"
 fi
 
-SCRIPT_BASE_PATH=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-cd "$SCRIPT_BASE_PATH"
+if ! command -v docker-compose >/dev/null 2>&1; then
+    sudo curl -L "https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-$(uname -s)-$(uname -m)" \
+    -o /usr/local/bin/docker-compose
+    sudo chmod +x /usr/local/bin/docker-compose
+fi
 
 usage() {
 echo "Usage:  $(basename "$0") [MODE] [OPTIONS] [COMMAND]"
@@ -25,12 +33,11 @@ echo "  up              Start the services"
 echo "  down            Stop the services"
 echo "  ps              Show the status of the services"
 echo "  logs            Follow the logs on console"
+echo "  login           Log in to a Docker registry"
 echo "  remove-all      Remove all containers"
 echo "  stop-all        Stop all containers running"
 echo
 }
-
-CONF_ARG="-f docker-compose-prod.yml"
 
 if [ $# -eq 0 ]; then
     usage
@@ -61,7 +68,11 @@ done
 echo "Arguments: $CONF_ARG"
 echo "Command: $@"
 
-if [ "$1" == "up" ]; then
+if [ "$1" == "login" ]; then
+    docker login $REGISTRY_URL
+    exit 0
+
+elif [ "$1" == "up" ]; then
     docker-compose $CONF_ARG pull
     docker-compose $CONF_ARG build --pull
     docker-compose $CONF_ARG up -d --remove-orphans
