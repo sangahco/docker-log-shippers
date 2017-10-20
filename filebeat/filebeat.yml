@@ -37,6 +37,9 @@ filebeat.prospectors:
 
 output.logstash:
   hosts: ["logstash:5043"]
+  ssl.certificate_authorities: ["/usr/share/filebeat/config/ssl/ca.pem"]
+  ssl.certificate: "/usr/share/filebeat/config/ssl/client-cert.pem"
+  ssl.key: "/usr/share/filebeat/config/ssl/client-key.pem"
 
 path.data: /data
 

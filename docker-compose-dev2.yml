@@ -3,6 +3,7 @@ version: "2"
 services:
 
   logspout:
+    build: logspout
     extends: 
       file: common-services.yml
       service: logspout

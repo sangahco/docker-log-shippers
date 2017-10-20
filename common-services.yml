@@ -3,7 +3,6 @@ version: "2"
 services:
 
   logspout:
-    image: gliderlabs/logspout
     environment:
       - DEBUG=true
       - LOGSPOUT=ignore
