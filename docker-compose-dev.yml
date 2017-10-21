@@ -10,9 +10,9 @@ services:
     extra_hosts: 
     - "logstash:${LOGSTASH_URL}"
     volumes:
-    - $PWD/ssl/ca.pem:/mnt/ca/ca.cert
-    - $PWD/ssl/client-cert.pem:/mnt/cert/client.cert
-    - $PWD/ssl/client-key.pem:/mnt/cert/client.key
+    - ${CA_CERTIFICATE}:/mnt/ca/ca.cert
+    - ${CLIENT_CERTIFICATE}:/mnt/cert/client.cert
+    - ${CLIENT_KEY}:/mnt/cert/client.key
     command: syslog+tls://${LOGSTASH_URL}:5000
 
   filebeat:
@@ -23,8 +23,10 @@ services:
     extra_hosts: 
     - "logstash:${LOGSTASH_URL}"
     volumes:
-    - $PWD/ssl:/usr/share/filebeat/config/ssl
-    environments:
+    - ${CA_CERTIFICATE}:/mnt/ca/ca.cert
+    - ${CLIENT_CERTIFICATE}:/mnt/cert/client.cert
+    - ${CLIENT_KEY}:/mnt/cert/client.key
+    environment:
     - LOGSTASH_SSL_ENABLED=True
 
 volumes:
