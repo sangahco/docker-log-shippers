@@ -3,12 +3,13 @@ version: "2"
 services:
 
   logspout:
+    image: ${REGISTRY_URL}/logspout
     extends: 
       file: common-services.yml
       service: logspout
     extra_hosts: 
     - "logstash:${LOGSTASH_URL}"
-    command: syslog://${LOGSTASH_URL}:5000
+    command: syslog+tcp://${LOGSTASH_URL}:5000
     restart: "unless-stopped"
 
   filebeat:
@@ -18,6 +19,8 @@ services:
       service: filebeat
     extra_hosts: 
     - "logstash:${LOGSTASH_URL}"
+    environment:
+    - LOGSTASH_SSL_ENABLED=False
     restart: "unless-stopped"
 
 volumes:
