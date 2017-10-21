@@ -1,4 +1,4 @@
 [submodule "logspout"]
 	path = logspout
 	url = https://github.com/emawind84/logspout.git
-    branch = latest
+    branch = master

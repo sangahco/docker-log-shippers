@@ -3,7 +3,7 @@ version: "2"
 services:
 
   logspout:
-    image: gliderlabs/logspout
+    image: ${REGISTRY_URL}/logspout
     extends: 
       file: common-services.yml
       service: logspout
