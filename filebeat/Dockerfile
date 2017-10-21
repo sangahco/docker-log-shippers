@@ -2,7 +2,8 @@ FROM debian:jessie
 MAINTAINER Emanuele Disco <emanuele.disco@gmail.com>
 
 ENV FB_VERSION=5.4.0 \
-    FB_HOME=/usr/share/filebeat
+    FB_HOME=/usr/share/filebeat \
+    LOGSTASH_SSL_ENABLED=False
 
 RUN set -e && \
     apt-get update && apt-get -y install \

@@ -19,6 +19,8 @@ services:
       service: filebeat
     extra_hosts: 
     - "logstash:${LOGSTASH_URL}"
+    environment:
+    - LOGSTASH_SSL_ENABLED=False
     restart: "unless-stopped"
 
 volumes:

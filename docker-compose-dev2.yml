@@ -19,6 +19,8 @@ services:
       file: common-services.yml
       service: filebeat
     network_mode: "container:logstash-srv"
+    environment:
+    - LOGSTASH_SSL_ENABLED=False
 
 volumes:
   fbdata:
