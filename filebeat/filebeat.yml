@@ -40,6 +40,7 @@ output.logstash:
   ssl.certificate_authorities: ["/usr/share/filebeat/config/ssl/ca.pem"]
   ssl.certificate: "/usr/share/filebeat/config/ssl/client-cert.pem"
   ssl.key: "/usr/share/filebeat/config/ssl/client-key.pem"
+  ssl.enabled: ${LOGSTASH_SSL_ENABLED}
 
 path.data: /data
 

@@ -1,4 +1,7 @@
 version: "2"
+# tls is disabled
+# logspout and filebeat run in the same network of logstash
+# so make sure you started logstash first
 
 services:
 
@@ -7,7 +10,7 @@ services:
     extends: 
       file: common-services.yml
       service: logspout
-    command: syslog://127.0.0.1:5000
+    command: syslog+tcp://127.0.0.1:5000
     network_mode: "container:logstash-srv"
 
   filebeat:
@@ -16,6 +19,8 @@ services:
       file: common-services.yml
       service: filebeat
     network_mode: "container:logstash-srv"
+    environment:
+    - LOGSTASH_SSL_ENABLED=False
 
 volumes:
   fbdata:
