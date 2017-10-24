@@ -9,11 +9,7 @@ services:
       service: logspout
     extra_hosts: 
     - "logstash:${LOGSTASH_URL}"
-    volumes:
-    - ${CA_CERTIFICATE}:/mnt/ca/ca.cert
-    - ${CLIENT_CERTIFICATE}:/mnt/cert/client.cert
-    - ${CLIENT_KEY}:/mnt/cert/client.key
-    command: syslog+tls://${LOGSTASH_URL}:5000
+    command: syslog+tcp://${LOGSTASH_URL}:5000
 
   filebeat:
     build: filebeat
@@ -22,12 +18,8 @@ services:
       service: filebeat
     extra_hosts: 
     - "logstash:${LOGSTASH_URL}"
-    volumes:
-    - ${CA_CERTIFICATE}:/mnt/ca/ca.cert
-    - ${CLIENT_CERTIFICATE}:/mnt/cert/client.cert
-    - ${CLIENT_KEY}:/mnt/cert/client.key
     environment:
-    - LOGSTASH_SSL_ENABLED=True
+    - LOGSTASH_SSL_ENABLED=False
 
 volumes:
   fbdata:

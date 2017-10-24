@@ -43,7 +43,7 @@ echo "  --prod      Log shippers for production"
 echo "  --dev       Log shippers for development"
 echo
 echo "Options:"
-echo "  --with-cadv     Add CAdvisor service"
+echo "  --with-tls      Add TLS transmission"
 echo
 echo "Commands:"
 echo "  up              Start the services"
@@ -70,6 +70,10 @@ case $i in
         ;;
     --dev)
         CONF_ARG="-f docker-compose-dev.yml"
+        shift
+        ;;
+    --with-tls)
+        CONF_ARG="$CONF_ARG -f docker-compose-with-tls.yml"
         shift
         ;;
     --help|-h)
