@@ -3,12 +3,13 @@ version: "2"
 services:
 
   logspout:
-    image: gliderlabs/logspout
     environment:
       - DEBUG=true
       - LOGSPOUT=ignore
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    extends:
+      service: logging
 
   filebeat:
     volumes:
@@ -27,6 +28,8 @@ services:
     - LOGSPOUT=ignore
     - FB_TAGS
     - FB_LOG_LEVEL
+    extends:
+      service: logging
 
   cadvisor:
     image: google/cadvisor:latest
@@ -37,3 +40,12 @@ services:
       - /var/lib/docker/:/var/lib/docker:ro
     environment: 
       - LOGSPOUT=ignore
+    extends:
+      service: logging
+
+  logging:
+    logging: 
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
