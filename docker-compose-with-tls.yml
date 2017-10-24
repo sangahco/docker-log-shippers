@@ -1,0 +1,18 @@
+version: "2"
+
+services:
+
+  logspout:
+    volumes:
+    - ${CA_CERTIFICATE}:/mnt/ca/ca.cert
+    - ${CLIENT_CERTIFICATE}:/mnt/cert/client.cert
+    - ${CLIENT_KEY}:/mnt/cert/client.key
+    command: syslog+tls://${LOGSTASH_URL}:5000
+
+  filebeat:
+    volumes:
+    - ${CA_CERTIFICATE}:/mnt/ca/ca.cert
+    - ${CLIENT_CERTIFICATE}:/mnt/cert/client.cert
+    - ${CLIENT_KEY}:/mnt/cert/client.key
+    environment:
+    - LOGSTASH_SSL_ENABLED=True
