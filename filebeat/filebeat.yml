@@ -41,6 +41,7 @@ output.logstash:
   ssl.certificate: "/mnt/cert/client.cert"
   ssl.key: "/mnt/cert/client.key"
   ssl.enabled: ${LOGSTASH_SSL_ENABLED}
+  ssl.verification_mode: none
 
 path.data: /data
 
