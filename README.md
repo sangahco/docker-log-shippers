@@ -7,7 +7,17 @@ which in turn it will give it to Elasticsearch.
 - **Filebeat** - Read the log from log files and send it to Logstash
 
 
-## Configurations available:
+## Download Me!
+
+Take this source from git repository with the following commands:
+
+    $ git clone https://github.com/sangahco/docker-log-shippers.git
+    $ cd docker-log-shippers
+    $ git submodule init
+    $ git submodule update
+
+
+## Configurations available
 
 - **docker-compose-prod.yml**
 
