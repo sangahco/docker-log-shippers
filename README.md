@@ -1,3 +1,7 @@
+[![HitCount](http://hits.dwyl.io/sangahco/sangahco/docker-log-shippers.svg)](http://hits.dwyl.io/sangahco/sangahco/docker-log-shippers)
+[![Jenkins](https://img.shields.io/jenkins/s/https/dev.builder.sangah.com/job/logspout.svg?label=logspout&style=flat-square)]()
+[![Jenkins](https://img.shields.io/jenkins/s/https/dev.builder.sangah.com/job/filebeat-5.4.svg?label=filebeat&style=flat-square)]()
+
 # Log Shippers Filebeat and Logspout for Logstash
 
 These are a series of log shippers to use for *harvesting* log from the server and bring it to Logstash,
