@@ -40,7 +40,7 @@ Take this source from git repository with the following commands:
 
 ---
 
-## Requirements
+## Prerequisites
 
 First make sure *Docker* and *Docker Compose* are installed on the machine with:
 
