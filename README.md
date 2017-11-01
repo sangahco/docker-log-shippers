@@ -6,6 +6,7 @@ which in turn it will give it to Elasticsearch.
 - **Logspout** - Read the log from Docker containers and send it to Logstash
 - **Filebeat** - Read the log from log files and send it to Logstash
 
+---
 
 ## Download Me!
 
@@ -16,6 +17,7 @@ Take this source from git repository with the following commands:
     $ git submodule init
     $ git submodule update
 
+---
 
 ## Configurations available
 
@@ -36,6 +38,8 @@ Take this source from git repository with the following commands:
   where you want to test these log shippers, is possible to use this configuration,
   with no need to set the `LOGSTASH_HOST` variable.
 
+---
+
 ## Requirements
 
 First make sure *Docker* and *Docker Compose* are installed on the machine with:
@@ -48,6 +52,7 @@ If they are missing, follow the instructions on the official website (they are n
 - [Docker CE Install How-to](https://docs.docker.com/engine/installation/)
 - [Docker Compose Install How-to](https://docs.docker.com/compose/install/)
 
+---
 
 ## How to Use
 
@@ -58,6 +63,7 @@ is set correctly to the right *Logstash* host machine.
 
     $ ./docker-auto.sh --help
 
+---
 
 ## Settings Up the Environment
 
