@@ -66,11 +66,13 @@ if ! command -v docker >/dev/null 2>&1; then
 fi
 
 withtls() {
-echo "--volume \"$(getenv CA_CERTIFICATE):/mnt/ca/ca.cert\""
-echo "--volume \"$(getenv CLIENT_CERTIFICATE):/mnt/cert/client.cert\""
-echo "--volume \"$(getenv CLIENT_KEY):/mnt/cert/client.key\""
-echo "--env \"LOGSTASH_SSL_ENABLED=True\""
+echo "--volume $(getenv CA_CERTIFICATE):/mnt/ca/ca.cert:ro"
+echo "--volume $(getenv CLIENT_CERTIFICATE):/mnt/cert/client.cert:ro"
+echo "--volume $(getenv CLIENT_KEY):/mnt/cert/client.key:ro"
+echo "--env LOGSTASH_SSL_ENABLED=True"
 }
+withtls
+exit 0
 
 for i in "$@"
 do
