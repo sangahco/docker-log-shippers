@@ -21,7 +21,7 @@ LOG9_PATH="$(getenv LOG9_PATH)"
 LOG10_PATH="$(getenv LOG10_PATH)"
 FB_TAGS="$(getenv FB_TAGS)"
 FB_DATA_HOME="$(getenv FB_DATA_HOME)"
-FB_CONTAINER_ID_FILE=/var/run/fb.did
+FB_CONTAINER_ID_FILE=$PWD/fb.did
 
 if [ -f "$FB_CONTAINER_ID_FILE" ]; then
     FB_DID=`cat "$FB_CONTAINER_ID_FILE"`
@@ -40,6 +40,9 @@ echo "# wget https://s3.ap-northeast-2.amazonaws.com/sangah-b1/docker-engine-1.7
 echo "# yum localinstall --nogpgcheck docker-engine-1.7.1-1.el6.x86_64.rpm"
 echo "# service docker start"
 echo "# exit"
+echo
+echo "Options:"
+echo "  --with-tls      Add TLS transmission"
 echo
 echo "Commands:"
 echo "  up              Start the services"
@@ -61,6 +64,30 @@ if ! command -v docker >/dev/null 2>&1; then
     usage
     exit 1
 fi
+
+withtls() {
+echo "--volume \"$(getenv CA_CERTIFICATE):/mnt/ca/ca.cert\""
+echo "--volume \"$(getenv CLIENT_CERTIFICATE):/mnt/cert/client.cert\""
+echo "--volume \"$(getenv CLIENT_KEY):/mnt/cert/client.key\""
+echo "--env \"LOGSTASH_SSL_ENABLED=True\""
+}
+
+for i in "$@"
+do
+case $i in
+    --with-tls)
+        CONF_ARG="$(withtls)"
+        shift
+        ;;
+    --help|-h)
+        usage
+        exit 1
+        ;;
+    *)
+        break
+        ;;
+esac
+done
 
 echo "Arguments: $CONF_ARG"
 echo "Command: $@"
@@ -86,6 +113,7 @@ elif [ "$1" == "up" ]; then
     --volume "${LOG10_PATH}:/usr/local/log/10" \
     --env "FB_TAGS=${FB_TAGS}" \
     --env "FB_LOG_LEVEL=${FB_LOG_LEVEL}" \
+    ${CONF_ARG} \
     --detach=true \
     --restart=always \
     $REGISTRY_URL/filebeat > $FB_CONTAINER_ID_FILE
