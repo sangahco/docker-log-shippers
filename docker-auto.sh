@@ -44,6 +44,7 @@ echo "  --dev       Log shippers for development"
 echo
 echo "Options:"
 echo "  --with-tls      Add TLS transmission"
+echo "  --with-cadv     Add CAdvisor service"
 echo
 echo "Commands:"
 echo "  up              Start the services"
@@ -74,6 +75,10 @@ case $i in
         ;;
     --with-tls)
         CONF_ARG="$CONF_ARG -f docker-compose-with-tls.yml"
+        shift
+        ;;
+    --with-cadv)
+        CONF_ARG="$CONF_ARG -f docker-compose-cadvisor.yml"
         shift
         ;;
     --help|-h)
