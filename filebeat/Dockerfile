@@ -3,7 +3,9 @@ MAINTAINER Emanuele Disco <emanuele.disco@gmail.com>
 
 ENV FB_VERSION=5.4.0 \
     FB_HOME=/usr/share/filebeat \
-    LOGSTASH_SSL_ENABLED=False
+    LOGSTASH_SSL_ENABLED=False \
+    LOGSTASH_HOST=logstash \
+    LOGSTASH_PORT=5043
 
 RUN set -e && \
     apt-get update && apt-get -y install \

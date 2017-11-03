@@ -36,7 +36,7 @@ filebeat.prospectors:
   multiline.match: after
 
 output.logstash:
-  hosts: ["logstash:5043"]
+  hosts: ["${LOGSTASH_HOST}:${LOGSTASH_PORT}"]
   ssl.certificate_authorities: ["/mnt/ca/ca.cert"]
   ssl.certificate: "/mnt/cert/client.cert"
   ssl.key: "/mnt/cert/client.key"
