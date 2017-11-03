@@ -139,6 +139,10 @@ elif [ "$1" == "logs" ]; then
     docker logs -f --tail 200 $FB_DID
     exit 0
     
+elif [ "$1" == "ps" ]; then
+    shift
+    docker ps --filter "id=${FB_DID}"
+    exit 0
 fi
 
 docker "$@" $FB_DID
