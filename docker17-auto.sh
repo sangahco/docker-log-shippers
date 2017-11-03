@@ -71,8 +71,6 @@ echo "--volume $(getenv CLIENT_CERTIFICATE):/mnt/cert/client.cert:ro"
 echo "--volume $(getenv CLIENT_KEY):/mnt/cert/client.key:ro"
 echo "--env LOGSTASH_SSL_ENABLED=True"
 }
-withtls
-exit 0
 
 for i in "$@"
 do
