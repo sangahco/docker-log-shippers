@@ -7,6 +7,7 @@ services:
       - DEBUG=true
       - LOGSPOUT=ignore
       - BACKLOG=false
+      - TAIL=n
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     extends:
